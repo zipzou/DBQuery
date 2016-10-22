@@ -17,7 +17,7 @@ import com.dbquery.interfaces.IConnection;
 /**
  * 抽象查询类，提供数据库访问
  * @author Frank
- * @version 1.2
+ * @version 1.3
  */
 public abstract class AbstractQueryObject {
 	
@@ -34,13 +34,14 @@ public abstract class AbstractQueryObject {
 		avoidNotBindDatabase();
 	}
 	
+	
 	/**
 	 * 更新数据
 	 * @param sqlStatement SQL语句
 	 * @param params 参数
 	 * @return 返回是否更新成功, <b><i>true</i></b>表示更新成功, <b><i>false</i></b>表示更新失败
 	 * */
-	protected boolean update(String sqlStatement, Object[]params){
+	protected boolean update(String sqlStatement, Object... params){
 		Connection dbConnection = null;
 		try {
 			dbConnection = this.connectToDatabase();
@@ -73,7 +74,7 @@ public abstract class AbstractQueryObject {
 	 * @param params 参数
 	 * @return 已删除的记录数目
 	 * */
-	protected int delete(String sqlStatement, Object[]params){
+	protected int delete(String sqlStatement, Object... params){
 		Connection dbConnection = null;
 		try {
 			dbConnection = this.connectToDatabase();
@@ -108,7 +109,7 @@ public abstract class AbstractQueryObject {
 	 * @param params 参数
 	 * @return 返回是否插入成功, <b><i>true</i></b>表示更新成功, <b><i>false</i></b>表示更新失败
 	 * */
-	protected boolean insert(String sqlStatement, Object[]params){
+	protected boolean insert(String sqlStatement, Object... params){
 		Connection insConnection = null;
 		try {
 			insConnection = this.connectToDatabase();
@@ -146,7 +147,7 @@ public abstract class AbstractQueryObject {
 	 * @param params 参数
 	 * @return 查询到的结果集
 	 * */
-	protected List<Map<String, Object>> select(String sqlStatement, Object[]params){
+	protected List<Map<String, Object>> select(String sqlStatement, Object... params){
 		Connection selectConnection = null;
 		try {
 			selectConnection = this.connectToDatabase();
@@ -198,7 +199,7 @@ public abstract class AbstractQueryObject {
 	 * @param params 要格式化填充的参数
 	 * @throws SQLException 在填充SQL语句时，发生填充项索引和待填充项发生冲突的异常
 	 * */
-	private void formatStatement(PreparedStatement statement, Object[]params) throws SQLException{
+	private void formatStatement(PreparedStatement statement, Object... params) throws SQLException{
 		for (int i = 0; i < params.length; i++) {
 			statement.setObject(i + 1, params[i]);
 		}

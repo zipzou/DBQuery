@@ -37,6 +37,6 @@ public final class QueryObject extends AbstractQueryObject {
 	 */
 	public boolean createTable() {
 		avoidNotBindDatabase();
-		return this.update(SQL_CREATE_TABLE, new Object[0]);
+		return this.update(SQL_CREATE_TABLE, new Object());
 	}
 }
