@@ -40,17 +40,17 @@ public class MySQLDBInfo extends DBBasicInfo {
 		if (this.machineAddress == null) {
 			if (this.databaseName == null) {
 				
-				return this.url + ":" + this.port + "?useOldAliasMetadataBehavior=true";// 未指定数据库名
+				return this.url + ":" + this.port + "?useOldAliasMetadataBehavior=true&useUnicode=true&CharsetEncode=utf8";// 未指定数据库名
 			}
 			
-			return this.url + ":" + this.port + "/" + this.databaseName + "?useOldAliasMetadataBehavior=true"; // 未指定数据库地址则使用默认本机地址
+			return this.url + ":" + this.port + "/" + this.databaseName + "?useOldAliasMetadataBehavior=true&useUnicode=true&CharsetEncode=utf8"; // 未指定数据库地址则使用默认本机地址
 		}
 		if (this.databaseName == null) {
 			
-			return "jdbc:mysql://" + this.machineAddress + ":" + this.port + "?useOldAliasMetadataBehavior=true"; // 未指定数据库名，则使用指定地址
+			return "jdbc:mysql://" + this.machineAddress + ":" + this.port + "?useOldAliasMetadataBehavior=true&useUnicode=true&CharsetEncode=utf8"; // 未指定数据库名，则使用指定地址
 		}
 		
-		return "jdbc:mysql://" + this.machineAddress + ":" + this.port + "/" + this.databaseName + "?useOldAliasMetadataBehavior=true";
+		return "jdbc:mysql://" + this.machineAddress + ":" + this.port + "/" + this.databaseName + "?useOldAliasMetadataBehavior=true&useUnicode=true&CharsetEncode=utf8";
 	}
 
 }
