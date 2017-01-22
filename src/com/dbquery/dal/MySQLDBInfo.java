@@ -18,7 +18,7 @@ public class MySQLDBInfo extends DBBasicInfo {
 	public MySQLDBInfo() {
 		this.driver = "com.mysql.jdbc.Driver";
 		this.port = 3306;		//默认端口为3306
-		this.url = "jdbc:mysql://localhost" + "?useOldAliasMetadataBehavior=true";// 默认URL地址
+		this.url = "jdbc:mysql://localhost" + "?useOldAliasMetadataBehavior=true&useUnicode=true&CharsetEncode=utf8";// 默认URL地址
 	}
 
 	/**
