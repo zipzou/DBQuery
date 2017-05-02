@@ -65,7 +65,7 @@ public class Model {
 			return null; // 防止空对象
 		try {
 			Field[] allDeclaredFields = object.getClass().getDeclaredFields();// 获取以声明的属性域
-			Map<String, Object> objectPair = new HashMap<>();// 键值对容器
+			Map<String, Object> objectPair = new HashMap<String, Object>();// 键值对容器
 			
 			for (Field field : allDeclaredFields) { // 遍历属性
 				int mod = field.getModifiers();

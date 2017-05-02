@@ -50,8 +50,9 @@ public abstract class AbstractQueryObject {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		} //数据库连接
-		
-		try (PreparedStatement updateStatement = dbConnection.prepareStatement(sqlStatement)){// 创建Statement防止注入
+		PreparedStatement updateStatement = null;
+		try {// 创建Statement防止注入
+			updateStatement = dbConnection.prepareStatement(sqlStatement);
 			this.formatStatement(updateStatement, params);// 格式化SQL语句
 			boolean res =  updateStatement.executeUpdate() >= 0;// 更新结果
 			updateStatement.close();
@@ -83,7 +84,10 @@ public abstract class AbstractQueryObject {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		try (PreparedStatement delStatement = dbConnection.prepareStatement(sqlStatement)){// 创建SQL声明语句，自动释放
+		PreparedStatement delStatement = null;
+		try {// 创建SQL声明语句，自动释放
+			
+			delStatement = dbConnection.prepareStatement(sqlStatement);
 			
 			// 填充语句
 			this.formatStatement(delStatement, params);
@@ -118,8 +122,11 @@ public abstract class AbstractQueryObject {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		} //数据库连接
-		
-		try(PreparedStatement insPrepareStatement = insConnection.prepareStatement(sqlStatement)) {
+		PreparedStatement insPrepareStatement = null;
+		try {
+			
+			insPrepareStatement = insConnection.prepareStatement(sqlStatement);
+			
 			// 格式化SQL
 			this.formatStatement(insPrepareStatement, params);
 			
@@ -157,14 +164,16 @@ public abstract class AbstractQueryObject {
 			e1.printStackTrace();
 		} // 连接
 		ResultSet setResult = null;
-		try (PreparedStatement selelctStatement = selectConnection.prepareStatement(sqlStatement)) { // 获取到SQL声明
+		PreparedStatement selelctStatement = null;
+		try  { // 获取到SQL声明
+			selelctStatement = selectConnection.prepareStatement(sqlStatement);
 			// 格式化声明
 			this.formatStatement(selelctStatement, params);
 			// 查询
 			setResult = selelctStatement.executeQuery();// 执行查询
 			// 结果集合转为集合
 			
-			List<Map<String, Object>> results = new ArrayList<>();
+			List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
 			
 			while (setResult.next()) {
 				Map<String, Object> rowObj = this.setTransformToMap(setResult); // 一条元祖
@@ -229,7 +238,7 @@ public abstract class AbstractQueryObject {
 		try {
 			int columnCount = set.getMetaData().getColumnCount();
 			// 获取所有列
-			Map<String, Object> queryObject = new HashMap<>();
+			Map<String, Object> queryObject = new HashMap<String, Object>();
 			for (int col = 1; col <= columnCount; col++) {
 				try {
 					String colName = set.getMetaData().getColumnName(col); // 获取列名
